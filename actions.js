@@ -868,5 +868,6 @@ module.exports = {
 				this.sendAction('input_to_main', action.options)
 			},
 		}
+		return actions
 	}
 }
