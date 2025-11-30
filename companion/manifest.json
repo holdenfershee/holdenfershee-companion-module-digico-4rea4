@@ -1,5 +1,5 @@
 {
-	"id": "DiGiGo-4rea4",
+	"id": "DiGiCo-4rea4",
 	"name": "DiGiCo-4rea4",
 	"shortname": "DiGiCo-4rea4",
 	"description": "DiGiCo 4rea4 module for Companion",
@@ -21,7 +21,8 @@
 			"email": "jeffrey.davidsz@vicreo.eu"
 		}
 	],
-
+	"legacyIds": [],
+	
 	"runtime": {
 		"type": "node22",
 		"api": "nodejs-ipc",
