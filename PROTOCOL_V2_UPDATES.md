@@ -1,4 +1,4 @@
-# Allen & Heath dLive/iLive Companion Module - Protocol V2.0 Updates
+# DiGiCo 4rea4 Companion Module - Protocol V2.0 Updates
 
 ## New Actions Added (Protocol V2.0 Features)
 
@@ -22,8 +22,6 @@ The following new actions have been added while maintaining full backward compat
 - **Set High Pass Filter** - Control HPF frequency (Off, 20Hz to 400Hz)
 
 ### Send Level Controls
-
-#### dLive Systems:
 - **Set Aux Mono Send Level** - Control mono aux send levels
 - **Set Aux Stereo Send Level** - Control stereo aux send levels  
 - **Set FX Mono Send Level** - Control mono FX send levels
@@ -31,8 +29,6 @@ The following new actions have been added while maintaining full backward compat
 - **Set Matrix Mono Send Level** - Control mono matrix send levels
 - **Set Matrix Stereo Send Level** - Control stereo matrix send levels
 - **Input to Main Assign** - Assign/unassign inputs to main mix
-
-#### iLive Systems:
 - **Set Mix Send Level** - Control mix send levels
 - **Set FX Send Level** - Control FX send levels
 
@@ -48,7 +44,6 @@ The following new actions have been added while maintaining full backward compat
 - All existing actions remain unchanged and fully functional
 - New actions are separate and don't interfere with existing functionality
 - Protocol V1.x commands continue to work as before
-- dLive and iLive specific features are properly separated
 
 ### Port Usage
 - MIDI commands: Port 51325 (existing)

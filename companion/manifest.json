@@ -1,12 +1,12 @@
 {
-	"id": "digico-4rea4",
-	"name": "digico-4rea4",
-	"shortname": "digico-4rea4",
-	"description": "Digico 4rea4 module for Companion",
+	"id": "DiGiGo-4rea4",
+	"name": "DiGiCo-4rea4",
+	"shortname": "DiGiCo-4rea4",
+	"description": "DiGiCo 4rea4 module for Companion",
 	"version": "1.0.0a",
 	"license": "MIT",
-	"repository": "git+https://github.com/holdenfershee/companion-module-digico-4rea4.git",
-	"bugs": "https://github.com/holdenfershee/companion-module-digico-4rea4/issues",
+	"repository": "git+https://github.com/holdenfershee/companion-module-DiGiCo-4rea4.git",
+	"bugs": "https://github.com/holdenfershee/companion-module-DiGiCo-4rea4/issues",
 	"maintainers": [
 		{
 			"name": "Holden Fershee",
@@ -22,8 +22,8 @@
 		}
 	],
 	"legacyIds": [
-		"allenheath-dlive",
-		"companion-module-allenheath-dlive-ilive"
+		"allenheath-4rea4",
+		"companion-module-allenheath-4rea4-ilive"
 	],
 	"runtime": {
 		"type": "node22",
@@ -31,7 +31,7 @@
 		"apiVersion": "1.4.0",
 		"entrypoint": "../index.js"
 	},
-	"manufacturer": "Digico",
+	"manufacturer": "DiGiCo",
 	"products": [
 		"4rea4"
 	],

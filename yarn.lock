@@ -445,9 +445,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"allenheath-dlive-ilive@workspace:.":
+"allenheath-4rea4-ilive@workspace:.":
   version: 0.0.0-use.local
-  resolution: "allenheath-dlive-ilive@workspace:."
+  resolution: "allenheath-4rea4-ilive@workspace:."
   dependencies:
     "@companion-module/base": "npm:^1.4.0"
     "@companion-module/tools": "npm:^2.3.0"

@@ -1,4 +1,21 @@
 const upgradeScripts = [
+	//Upgrade 2.0.0(dLive, iLive) > 1.0.0a(4rea4)
+	function (context, props) {
+		const result = {
+			updatedConfig: null,
+			updatedActions: [],
+			updatedFeedbacks: [],
+		}
+
+		if (props.config) {
+			if (props.config.port === undefined) {
+				result.updatedConfig = { ...props.config, model: '4rea4' }
+			}
+		}
+
+		return result
+	},
+	
 	// Upgrade 1.2.0 > 1.3.0 (adding iLive functions)
 	function (context, props) {
 		const result = {
@@ -9,7 +26,7 @@ const upgradeScripts = [
 
 		if (props.config) {
 			if (props.config.model === undefined) {
-				result.updatedConfig = { ...props.config, model: 'dLive' }
+				result.updatedConfig = { ...props.config, model: 'dlive' }
 			}
 		}
 

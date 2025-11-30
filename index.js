@@ -1,7 +1,7 @@
 /**
  *
- * Companion instance class for the A&H dLive & iLive Mixers.
- * @version 2.0.0
+ * Companion instance class for the DiGiCo 4rea4 line of consoles.
+ * @version 1.0.0a
  *
  */
 
@@ -43,7 +43,7 @@ class ModuleInstance extends InstanceBase {
 		let routingCmds = []
 		let start = isMute ? this.dcaCount : 0
 		let qty = isMute ? 8 : this.dcaCount
-		let chOfs = this.config.model == 'dLive' ? 0 : 0x20
+		let chOfs = 0
 		for (let i = start; i < start + qty; i++) {
 			let grpCode = i + (selArray.includes(`${i - start}`) ? 0x40 : 0)
 			routingCmds.push(Buffer.from([0xb0, 0x63, ch + chOfs, 0xb0, 0x62, 0x40, 0xb0, 0x06, grpCode]))
@@ -77,17 +77,17 @@ class ModuleInstance extends InstanceBase {
 
 			case 'mute_mono_group':
 			case 'mute_stereo_group':
-				chOfs = this.config.model == 'dLive' ? 1 : 0
+				chOfs = 1
 				break
 
 			case 'mute_mono_aux':
 			case 'mute_stereo_aux':
-				chOfs = this.config.model == 'dLive' ? 2 : 0
+				chOfs = 2
 				break
 
 			case 'mute_mono_matrix':
 			case 'mute_stereo_matrix':
-				chOfs = this.config.model == 'dLive' ? 3 : 0
+				chOfs = 3
 				break
 
 			case 'mute_mono_fx_send':
@@ -97,7 +97,7 @@ class ModuleInstance extends InstanceBase {
 			case 'mute_master':
 			case 'mute_ufx_send':
 			case 'mute_ufx_return':
-				chOfs = this.config.model == 'dLive' ? 4 : 0
+				chOfs = 4
 				break
 
 			case 'fader_input':
@@ -126,7 +126,7 @@ class ModuleInstance extends InstanceBase {
 			case 'fader_fx_return':
 			case 'fader_ufx_send':
 			case 'fader_ufx_return':
-				chOfs = this.config.model == 'dLive' ? 4 : 0
+				chOfs = 4
 				break
 
 			case 'phantom':
@@ -329,7 +329,7 @@ class ModuleInstance extends InstanceBase {
 				id: 'info',
 				width: 12,
 				label: 'Information',
-				value: 'This module is for the Allen & Heath dLive and iLive mixers, as well as the Digico 4rea4 line of consoles.',
+				value: 'This module is for the DiGiCo 4rea4 line of consoles.',
 			},
 			{
 				type: 'textinput',
@@ -344,11 +344,9 @@ class ModuleInstance extends InstanceBase {
 				id: 'model',
 				label: 'Console Type',
 				width: 6,
-				default: 'dLive',
+				default: '4rea4',
 				choices: [
-					{ id: 'dLive', label: 'dLive' },
-					{ id: 'iLive', label: 'iLive' },
-					{ id: '4rea4', label: '4rea4' },
+					{ id: '4rea4', label: '4rea4' }
 				],
 			},
 			{
@@ -360,10 +358,11 @@ class ModuleInstance extends InstanceBase {
 				min: 1,
 				max: 65535,
 			},
+			//TODO: verify tcp port for 4rea4 (and existence)
 			{
 				type: 'number',
 				id: 'tcpPort',
-				label: 'TCP Port (dLive only)',
+				label: 'TCP Port (4rea4 only)',
 				width: 6,
 				default: 51321,
 				min: 1,
@@ -372,7 +371,7 @@ class ModuleInstance extends InstanceBase {
 			{
 				type: 'number',
 				id: 'midiChannel',
-				label: 'MIDI Channel for dLive System (N)',
+				label: 'MIDI Channel for 4rea4 System (N)',
 				width: 6,
 				default: 0,
 				min: 0,
@@ -444,21 +443,22 @@ class ModuleInstance extends InstanceBase {
 				this.log('debug', `MIDI Connected to ${this.config.host}`)
 			})
 
-			if (this.config.model == 'dLive') {
-				this.tcpSocket = new TCPHelper(this.config.host, this.config.tcpPort)
+			//TODO: verify TCP for 4rea4
+			// if (this.config.model == '4rea4') {
+			// 	this.tcpSocket = new TCPHelper(this.config.host, this.config.tcpPort)
 
-				this.tcpSocket.on('status_change', (status, message) => {
-					this.updateStatus(status, message)
-				})
+			// 	this.tcpSocket.on('status_change', (status, message) => {
+			// 		this.updateStatus(status, message)
+			// 	})
 
-				this.tcpSocket.on('error', (err) => {
-					this.log('error', 'TCP error: ' + err.message)
-				})
+			// 	this.tcpSocket.on('error', (err) => {
+			// 		this.log('error', 'TCP error: ' + err.message)
+			// 	})
 
-				this.tcpSocket.on('connect', () => {
-					this.log('debug', `TCP Connected to ${this.config.host}`)
-				})
-			}
+			// 	this.tcpSocket.on('connect', () => {
+			// 		this.log('debug', `TCP Connected to ${this.config.host}`)
+			// 	})
+			// }
 		}
 	}
 
@@ -473,7 +473,7 @@ class ModuleInstance extends InstanceBase {
 		// Provide default config if none exists
 		this.config = config || {
 			host: '192.168.1.70',
-			model: 'dLive',
+			model: '4rea4',
 			midiPort: 51328,
 			tcpPort: 51321,
 			midiChannel: 0
