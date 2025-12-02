@@ -28,7 +28,7 @@ const {
 	offset_mute_groups,
 	channel_count,
 	control_group_count,
-	scene_count,
+	snapshot_count,
 } = require('./constants')
 
 export function getFeedbacks() {

@@ -62,11 +62,14 @@ const upgradeScripts = [
 					cgChArr[action.options.inputChannel].push(`${action.options.cgChannel & 0x3f}`)
 					changed = true
 					break
-				case 'scene_recall_128':
-				case 'scene_recall_256':
-				case 'scene_recall_384':
-				case 'scene_recall_500':
-					newAction.actionId = 'scene_recall'
+				case 'snapshot_recall_128':
+				case 'snapshot_recall_256':
+				case 'snapshot_recall_384':
+				case 'snapshot_recall_512':
+				case 'snapshot_recall_640':
+				case 'snapshot_recall_768':
+				case 'snapshot_recall_800':
+					newAction.actionId = 'snapshot_recall'
 					changed = true
 					break
 			}

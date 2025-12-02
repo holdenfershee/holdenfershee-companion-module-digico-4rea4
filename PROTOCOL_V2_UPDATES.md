@@ -6,8 +6,8 @@ The following new actions have been added while maintaining full backward compat
 
 ### Scene Navigation
 
-- **Scene Go Next** - Navigate to the next scene
-- **Scene Go Previous** - Navigate to the previous scene
+- **Scene Go Next** - Navigate to the next snapshot
+- **Scene Go Previous** - Navigate to the previous snapshot
 
 ### Solo Controls
 

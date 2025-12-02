@@ -9,7 +9,7 @@ The feedback portion of this module is heavily based on (Jeffery Davidsz's)[http
 
 ## Supported Consoles
 
-- **4rea4 Series**: Compatible feature set with up to 128 input channels, 24 Control Groups, and 800 scenes.
+- **4rea4 Series**: Compatible feature set with up to 128 input channels, 24 Control Groups, and 800 snapshots.
 
 ## Connection Setup
 
@@ -126,7 +126,7 @@ All fader controls use a precise dB scale:
 - **v2.0.0**: Complete rewrite for Companion 3.0/4.0 compatibility
   - Added Protocol V2.0 support with 20+ new actions
   - Enhanced EQ, preamp, and send level controls
-  - Improved scene navigation
+  - Improved snapshot navigation
   - Solo controls and advanced routing
 - **v1.x**: Legacy Companion 2.x versions
 

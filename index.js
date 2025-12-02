@@ -37,7 +37,7 @@ const {
 	offset_mute_groups,
 	channel_count,
 	control_group_count,
-	scene_count,
+	snapshot_count,
 } = require('./constants')
 const TIME_BETW_MULTIPLE_REQ_MS = 150
 
@@ -175,16 +175,16 @@ class ModuleInstance extends InstanceBase {
 				cmd.buffers = this.setRouting(channel, opt.muteGroup, true)
 				break
 
-			case 'scene_recall':
-				let sceneNumber = parseInt(opt.sceneNumber)
-				cmd.buffers = [Buffer.from([0xb0, 0, (sceneNumber >> 7) & 0x0f, 0xc0, sceneNumber & 0x7f])]
+			case 'snapshot_recall':
+				let snapshotNumber = parseInt(opt.snapshotNumber)
+				cmd.buffers = [Buffer.from([0xb0, 0, (snapshotNumber >> 7) & 0x0f, 0xc0, snapshotNumber & 0x7fff])]
 				break
 
-			case 'scene_next':
+			case 'snapshot_next':
 				cmd.buffers = [Buffer.from([0xb0, 0x77, 0x7f])] // Control Change for Scene Next
 				break
 
-			case 'scene_previous':
+			case 'snapshot_previous':
 				cmd.buffers = [Buffer.from([0xb0, 0x76, 0x7f])] // Control Change for Scene Previous
 				break
 

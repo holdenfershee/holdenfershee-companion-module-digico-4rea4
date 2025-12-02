@@ -29,7 +29,7 @@ const {
 	offset_mute_groups,
 	channel_count,
 	control_group_count,
-	scene_count,
+	snapshot_count,
 } = require('./constants')
 
 module.exports = {
@@ -50,7 +50,7 @@ module.exports = {
 		}
 
 		this.CHOICES_SCENES = []
-		for (let i = 0; i < scene_count; i++) {
+		for (let i = 0; i < snapshot_count; i++) {
 			this.CHOICES_SCENES.push({ label: `SCENE ${i + 1}`, id: i })
 		}
 
@@ -405,39 +405,39 @@ module.exports = {
 			},
 		}
 
-		actions['scene_recall'] = {
+		actions['snapshot_recall'] = {
 			name: 'Scene Recall',
 			options: [
 				{
 					type: 'dropdown',
 					label: 'Scene Number',
-					id: 'sceneNumber',
+					id: 'snapshotNumber',
 					default: '0',
 					choices: this.CHOICES_SCENES,
 					minChoicesForSearch: 0,
 				},
 			],
 			callback: async (action) => {
-				this.sendAction('scene_recall', action.options)
+				this.sendAction('snapshot_recall', action.options)
 			},
 		}
 
 		// New Protocol V2.0 Actions
 
 		// Scene Navigation
-		actions['scene_next'] = {
+		actions['snapshot_next'] = {
 			name: 'Scene Go Next',
 			options: [],
 			callback: async (action) => {
-				this.sendAction('scene_next', action.options)
+				this.sendAction('snapshot_next', action.options)
 			},
 		}
 
-		actions['scene_previous'] = {
+		actions['snapshot_previous'] = {
 			name: 'Scene Go Previous',
 			options: [],
 			callback: async (action) => {
-				this.sendAction('scene_previous', action.options)
+				this.sendAction('snapshot_previous', action.options)
 			},
 		}
 
