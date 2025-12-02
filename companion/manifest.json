@@ -14,7 +14,7 @@
 		}
 	],
 	"legacyIds": [],
-	
+
 	"runtime": {
 		"type": "node22",
 		"api": "nodejs-ipc",
@@ -22,11 +22,6 @@
 		"entrypoint": "../index.js"
 	},
 	"manufacturer": "DiGiCo",
-	"products": [
-		"4rea4"
-	],
-	"keywords": [
-		"Audio",
-		"Sound"
-	]
+	"products": ["4rea4"],
+	"keywords": ["Audio", "Sound"]
 }

@@ -175,9 +175,7 @@ class ModuleInstance extends InstanceBase {
 				break
 
 			case 'preamp_pad':
-				cmd.buffers = [
-					Buffer.from([0xf0, 0, 0, 0x1a, 0x50, 0x10, 0x01, 0, 0, 0x0d, strip, opt.pad ? 0x7f : 0, 0xf7]),
-				]
+				cmd.buffers = [Buffer.from([0xf0, 0, 0, 0x1a, 0x50, 0x10, 0x01, 0, 0, 0x0d, strip, opt.pad ? 0x7f : 0, 0xf7])]
 				break
 
 			case 'hpf_control':
@@ -204,7 +202,7 @@ class ModuleInstance extends InstanceBase {
 				let sendCh = parseInt(opt.send)
 				let sendLevel = parseInt(opt.level)
 				let sendType = 0x01 // Default for aux sends
-				
+
 				if (actionId.includes('fx') && !actionId.includes('ufx')) {
 					sendType = 0x02 // FX sends
 				} else if (actionId.includes('matrix')) {
@@ -212,7 +210,7 @@ class ModuleInstance extends InstanceBase {
 				} else if (actionId.includes('ufx')) {
 					sendType = 0x04 // UFX sends
 				}
-				
+
 				cmd.buffers = [
 					Buffer.from([0xf0, 0, 0, 0x1a, 0x50, 0x10, 0x01, 0, 0, sendType, inputCh, sendCh, sendLevel, 0xf7]),
 				]
@@ -238,23 +236,23 @@ class ModuleInstance extends InstanceBase {
 				// Control Change message for UFX Unit Key Parameter with CC value scaling
 				let keyMidiCh = parseInt(opt.midiChannel) - 1 // Convert to 0-based
 				let controlNum = parseInt(opt.controlNumber)
-				
+
 				// Map key to CC value range (refer to protocol table)
 				let keyMapping = {
-					'C': 5,    // Mid-range value for C (0-10 range)
-					'C#': 16,  // Mid-range value for C# (11-21 range)
-					'D': 26,   // Mid-range value for D (22-31 range)
-					'D#': 37,  // Mid-range value for D# (32-42 range)
-					'E': 47,   // Mid-range value for E (43-52 range)
-					'F': 58,   // Mid-range value for F (53-63 range)
-					'F#': 69,  // Mid-range value for F# (64-74 range)
-					'G': 79,   // Mid-range value for G (75-84 range)
-					'G#': 90,  // Mid-range value for G# (85-95 range)
-					'A': 100,  // Mid-range value for A (96-105 range)
+					C: 5, // Mid-range value for C (0-10 range)
+					'C#': 16, // Mid-range value for C# (11-21 range)
+					D: 26, // Mid-range value for D (22-31 range)
+					'D#': 37, // Mid-range value for D# (32-42 range)
+					E: 47, // Mid-range value for E (43-52 range)
+					F: 58, // Mid-range value for F (53-63 range)
+					'F#': 69, // Mid-range value for F# (64-74 range)
+					G: 79, // Mid-range value for G (75-84 range)
+					'G#': 90, // Mid-range value for G# (85-95 range)
+					A: 100, // Mid-range value for A (96-105 range)
 					'A#': 111, // Mid-range value for A# (106-116 range)
-					'B': 122   // Mid-range value for B (117-127 range)
+					B: 122, // Mid-range value for B (117-127 range)
 				}
-				
+
 				let keyValue = keyMapping[opt.key] || 5
 				cmd.buffers = [Buffer.from([0xb0 + keyMidiCh, controlNum, keyValue])]
 				break
@@ -263,14 +261,14 @@ class ModuleInstance extends InstanceBase {
 				// Control Change message for UFX Unit Scale Parameter with CC value scaling
 				let scaleMidiCh = parseInt(opt.midiChannel) - 1 // Convert to 0-based
 				let scaleControlNum = parseInt(opt.controlNumber)
-				
+
 				// Map scale to CC value range (refer to protocol table)
 				let scaleMapping = {
-					'Major': 21,      // Mid-range value for Major (0-42 range)
-					'Minor': 63,      // Mid-range value for Minor (43-84 range)
-					'Chromatic': 106  // Mid-range value for Chromatic (85-127 range)
+					Major: 21, // Mid-range value for Major (0-42 range)
+					Minor: 63, // Mid-range value for Minor (43-84 range)
+					Chromatic: 106, // Mid-range value for Chromatic (85-127 range)
 				}
-				
+
 				let scaleValue = scaleMapping[opt.scale] || 21
 				cmd.buffers = [Buffer.from([0xb0 + scaleMidiCh, scaleControlNum, scaleValue])]
 				break
@@ -303,12 +301,18 @@ class ModuleInstance extends InstanceBase {
 
 		for (let i = 0; i < cmd.buffers.length; i++) {
 			if (cmd.port === this.config.midiPort && this.midiSocket !== undefined) {
-				this.log('debug', `sending ${cmd.buffers[i].toString('hex')} via MIDI @${this.config.host}:${this.config.midiPort}`)
+				this.log(
+					'debug',
+					`sending ${cmd.buffers[i].toString('hex')} via MIDI @${this.config.host}:${this.config.midiPort}`,
+				)
 				this.midiSocket.send(cmd.buffers[i]).catch((e) => {
 					this.log('error', `MIDI send error: ${e.message}`)
 				})
 			} else if (this.tcpSocket !== undefined) {
-				this.log('debug', `sending ${cmd.buffers[i].toString('hex')} via TCP @${this.config.host}:${this.config.tcpPort}`)
+				this.log(
+					'debug',
+					`sending ${cmd.buffers[i].toString('hex')} via TCP @${this.config.host}:${this.config.tcpPort}`,
+				)
 				this.tcpSocket.send(cmd.buffers[i]).catch((e) => {
 					this.log('error', `TCP send error: ${e.message}`)
 				})
@@ -346,9 +350,7 @@ class ModuleInstance extends InstanceBase {
 				label: 'Console Type',
 				width: 6,
 				default: '4rea4',
-				choices: [
-					{ id: '4rea4', label: '4rea4' }
-				],
+				choices: [{ id: '4rea4', label: '4rea4' }],
 			},
 			{
 				type: 'number',
@@ -378,7 +380,6 @@ class ModuleInstance extends InstanceBase {
 				min: 0,
 				max: 15,
 			},
-
 		]
 	}
 
@@ -410,15 +411,15 @@ class ModuleInstance extends InstanceBase {
 	async init() {
 		// Initialize with current config or empty object if not set yet
 		await this.configUpdated(this.config || {})
-		this.inputMuteState = new Array(128).fill(0) 
-		this.groupMuteState = new Array(64).fill(0) 	// Covers Mono and Stereo Groups
-		this.auxMuteState = new Array(64).fill(0)   	// Covers Mono and Stereo Auxes
-		this.matrixMuteState = new Array(64).fill(0)	// Covers Mono and Stereo Matrix
-		this.fxSendMuteState = new Array(32).fill(0)	// Covers Mono and Stereo FX Sends
+		this.inputMuteState = new Array(128).fill(0)
+		this.groupMuteState = new Array(64).fill(0) // Covers Mono and Stereo Groups
+		this.auxMuteState = new Array(64).fill(0) // Covers Mono and Stereo Auxes
+		this.matrixMuteState = new Array(64).fill(0) // Covers Mono and Stereo Matrix
+		this.fxSendMuteState = new Array(32).fill(0) // Covers Mono and Stereo FX Sends
 		this.fxReturnMuteState = new Array(16).fill(0)
 		this.dcaMuteState = new Array(24).fill(0)
 		this.muteGroupMuteState = new Array(8).fill(0)
-		this.masterMuteState = new Array(8).fill(0) 	// For Mains/Masters
+		this.masterMuteState = new Array(8).fill(0) // For Mains/Masters
 	}
 
 	/**
@@ -453,7 +454,6 @@ class ModuleInstance extends InstanceBase {
 				this.log('debug', `MIDI Connected to ${this.config.host}`)
 			})
 
-			
 			if (this.config.model == '4rea4') {
 				this.tcpSocket = new TCPHelper(this.config.host, this.config.tcpPort)
 
@@ -487,7 +487,6 @@ class ModuleInstance extends InstanceBase {
 				this.midiSocket.on('connect', () => {
 					this.log('debug', `MIDI Connected to ${this.config.host}`)
 					this.updateStatus(InstanceStatus.Ok)
-					
 				})
 			}
 		}
@@ -600,104 +599,106 @@ class ModuleInstance extends InstanceBase {
 		this.sendCommand(buffer)
 	}
 	processIncomingData(data) {
-    for (let i = 0; i < data.length; i++) {
-        let byte = data[i];
+		for (let i = 0; i < data.length; i++) {
+			let byte = data[i]
 
-        // Check for Note On messages (0x90 - 0x9F)
-        // Assuming MIDI Channel N = 0 (Default). Adjust logic if N > 0.
-        if (byte >= 0x90 && byte <= 0x94) {
-			if (byte == 0) {
-				break; // Prevent out-of-bounds access
+			// Check for Note On messages (0x90 - 0x9F)
+			// Assuming MIDI Channel N = 0 (Default). Adjust logic if N > 0.
+			if (byte >= 0x90 && byte <= 0x94) {
+				if (byte == 0) {
+					break // Prevent out-of-bounds access
+				} else {
+					byte = 0
+				}
 			}
-			else {
-				byte = 0
-			} 
-		}
-            let midiChannel = byte & 0x0F;
-            let note = data[i+1];
-            let velocity = data[i+2];
-            
-            // 4rea4 Spec: Velocity > 0x40 is Mute ON, < 0x40 is Mute OFF
-            let isMuted = velocity >= 0x40 ? 1 : 0; 
+			let midiChannel = byte & 0x0f
+			let note = data[i + 1]
+			let velocity = data[i + 2]
 
-            // Handle based on MIDI Channel (N=0)
+			// 4rea4 Spec: Velocity > 0x40 is Mute ON, < 0x40 is Mute OFF
+			let isMuted = velocity >= 0x40 ? 1 : 0
+
+			// Handle based on MIDI Channel (N=0)
 			//offsets handled in feedbacks.js
 			//TODO: generalize for different offset values here and in feedbacks.js
-            switch (midiChannel) {
-                case 0: // Ch N: Inputs
-                    if (note < 0x7F) {
-                        this.inputMuteState[note] = isMuted;
-                        this.checkFeedbacks('inputMute');
-                    }
-                    break;
+			switch (midiChannel) {
+				case 0: // Ch N: Inputs
+					if (note < 0x7f) {
+						this.inputMuteState[note] = isMuted
+						this.checkFeedbacks('inputMute')
+					}
+					break
 
-                case 1: // Ch N+1: Groups (Mono 1-48, Stereo 1-24)
-                    if (note < 0x3D) { // Mono Groups 1-48
-						this.groupMuteState[note] = isMuted;
-						this.checkFeedbacks('monoGroupMute');
+				case 1: // Ch N+1: Groups (Mono 1-48, Stereo 1-24)
+					if (note < 0x3d) {
+						// Mono Groups 1-48
+						this.groupMuteState[note] = isMuted
+						this.checkFeedbacks('monoGroupMute')
+					} else if (note >= 0x40 && note < 0x57) {
+						//stereo Groups 1-24
+						this.groupMuteState[note - 0x40] = isMuted // Offset for Stereo Groups
+						this.checkFeedbacks('stereoGroupMute')
 					}
-					else if (note >= 0x40 && note < 0x57) { //stereo Groups 1-24
-						this.groupMuteState[note - 0x40] = isMuted; // Offset for Stereo Groups
-						this.checkFeedbacks('stereoGroupMute');
-					}
-                    break;
+					break
 
-                case 2: // Ch N+2: Auxes (Mono 1-48, Stereo 1-24)
-                    if (note < 0x2F) { // Mono Groups 1-48
-						this.groupMuteState[note] = isMuted;
-						this.checkFeedbacks('monoAuxMute');
+				case 2: // Ch N+2: Auxes (Mono 1-48, Stereo 1-24)
+					if (note < 0x2f) {
+						// Mono Groups 1-48
+						this.groupMuteState[note] = isMuted
+						this.checkFeedbacks('monoAuxMute')
+					} else if (note >= 0x40 && note < 0x57) {
+						//stereo Groups 1-24
+						this.groupMuteState[note - 0x40] = isMuted // Offset for Stereo Groups
+						this.checkFeedbacks('stereoAuxMute')
 					}
-					else if (note >= 0x40 && note < 0x57) { //stereo Groups 1-24
-						this.groupMuteState[note - 0x40] = isMuted; // Offset for Stereo Groups
-						this.checkFeedbacks('stereoAuxMute');
-					}
-                    break;
-				
+					break
+
 				case 3: // Ch N+3: Matrices (Mono 1-48, Stereo 1-24)
-                    if (note < 0x2F) { // Mono Groups 1-48
-						this.groupMuteState[note] = isMuted;
-						this.checkFeedbacks('monoMatrixMute');
+					if (note < 0x2f) {
+						// Mono Groups 1-48
+						this.groupMuteState[note] = isMuted
+						this.checkFeedbacks('monoMatrixMute')
+					} else if (note >= 0x40 && note < 0x57) {
+						//stereo Groups 1-24
+						this.groupMuteState[note] = isMuted // Offset for Stereo Groups
+						this.checkFeedbacks('stereoMatrixMute')
 					}
-					else if (note >= 0x40 && note < 0x57) { //stereo Groups 1-24
-						this.groupMuteState[note] = isMuted; // Offset for Stereo Groups
-						this.checkFeedbacks('stereoMatrixMute');
-					}
-                    break;
+					break
 
-                case 4: // Ch N+4: FX, Mains, DCA, Mute Groups
-                    if (note >= 0x00 && note <= 0x0F) { // Mono FX Send 1-16
-                        this.fxSendMuteState[note] = isMuted; 
-                        this.checkFeedbacks('monoFxSendMute');
-                    } 
-                    else if (note >= 0x10 && note <= 0x1F) { // Stereo FX Send 1-16
-                        // Map to index 16-31 in our array
-                        this.fxSendMuteState[note] = isMuted; 
-                        this.checkFeedbacks('stereoFxSendMute');
-                    }
-                    else if (note >= 0x20 && note <= 0x2F) { // FX Return 1-16
-                        this.fxReturnMuteState[note] = isMuted;
-                        this.checkFeedbacks('fxReturnMute');
-                    }
-                    else if (note >= 0x30 && note <= 0x33) { // Mains 1-6
-                        this.masterMuteState[note] = isMuted;
-                        this.checkFeedbacks('areaOutsMute');
-                    }
-                    else if (note >= 0x36 && note <= 0x4D) { // DCA 1-24
-                        this.dcaMuteState[note] = isMuted;
-                        this.checkFeedbacks('controlGroupCGMute');
-                    }
-                    else if (note >= 0x4E && note <= 0x55) { // Mute Groups 1-8
-                        this.muteGroupMuteState[note] = isMuted;
-                        this.checkFeedbacks('muteGroupMute');
-                    }
-                    break;
-            }
-            
-            // Skip the next 2 bytes since we processed them
-            i += 2; 
-        }
-    }
-}
+				case 4: // Ch N+4: FX, Mains, DCA, Mute Groups
+					if (note >= 0x00 && note <= 0x0f) {
+						// Mono FX Send 1-16
+						this.fxSendMuteState[note] = isMuted
+						this.checkFeedbacks('monoFxSendMute')
+					} else if (note >= 0x10 && note <= 0x1f) {
+						// Stereo FX Send 1-16
+						// Map to index 16-31 in our array
+						this.fxSendMuteState[note] = isMuted
+						this.checkFeedbacks('stereoFxSendMute')
+					} else if (note >= 0x20 && note <= 0x2f) {
+						// FX Return 1-16
+						this.fxReturnMuteState[note] = isMuted
+						this.checkFeedbacks('fxReturnMute')
+					} else if (note >= 0x30 && note <= 0x33) {
+						// Mains 1-6
+						this.masterMuteState[note] = isMuted
+						this.checkFeedbacks('areaOutsMute')
+					} else if (note >= 0x36 && note <= 0x4d) {
+						// DCA 1-24
+						this.dcaMuteState[note] = isMuted
+						this.checkFeedbacks('controlGroupCGMute')
+					} else if (note >= 0x4e && note <= 0x55) {
+						// Mute Groups 1-8
+						this.muteGroupMuteState[note] = isMuted
+						this.checkFeedbacks('muteGroupMute')
+					}
+					break
+			}
+
+			// Skip the next 2 bytes since we processed them
+			i += 2
+		}
+	}
 
 	/**
 	 * Process an updated configuration array.
@@ -713,7 +714,7 @@ class ModuleInstance extends InstanceBase {
 			model: '4rea4',
 			midiPort: 51328,
 			tcpPort: 51321,
-			midiChannel: 0
+			midiChannel: 0,
 		}
 
 		// Ensure port defaults are set even if config exists

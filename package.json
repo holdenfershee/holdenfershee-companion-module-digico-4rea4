@@ -3,7 +3,7 @@
 	"version": "1.0.2alpha",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "prettier -w ."
 	},
 	"license": "MIT",
 	"repository": {
@@ -15,6 +15,8 @@
 		"@companion-module/base": "^1.4.0"
 	},
 	"devDependencies": {
-		"@companion-module/tools": "^2.3.0"
-	}
+		"@companion-module/tools": "^2.3.0",
+		"prettier": "^3.4.2"
+	},
+	"prettier": "@companion-module/tools/.prettierrc.json"
 }

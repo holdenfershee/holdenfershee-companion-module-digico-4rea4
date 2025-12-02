@@ -14,7 +14,7 @@ The feedback portion of this module is heavily based on (Jeffery Davidsz's)[http
 ## Connection Setup
 
 1. **IP Address**: Enter the IP address of your 4rea4 Surface or MixRack
-2. **Network Ports**: 
+2. **Network Ports**:
    - **MIDI Port**: Configurable (default: 51328) - Used for basic mixer commands
    - **TCP Port**: Configurable (default: 51321) - Used for 4rea4 advanced features only
 3. **MIDI Channel Configuration**:
@@ -30,7 +30,7 @@ The feedback portion of this module is heavily based on (Jeffery Davidsz's)[http
 - **Mute DCA** - Mute/unmute DCA groups
 - **Toggle 48v Phantom on Preamp** - Enable/disable phantom power
 - **Mute Mono Group** - Mute/unmute mono group buses
-- **Mute Stereo Group** - Mute/unmute stereo group buses  
+- **Mute Stereo Group** - Mute/unmute stereo group buses
 - **Mute Mono Aux** - Mute/unmute mono aux sends
 - **Mute Stereo Aux** - Mute/unmute stereo aux sends
 - **Mute Mono Matrix** - Mute/unmute mono matrix outputs
@@ -57,21 +57,26 @@ The feedback portion of this module is heavily based on (Jeffery Davidsz's)[http
 ### 🎛️ Advanced Controls (Protocol V2.0)
 
 #### Scene Management:
+
 - **Scene Recall** - Recall a specific cue by number
 - **Scene Go Next** - Navigate to the next cue
 - **Scene Go Previous** - Navigate to the previous cue
 
 #### Solo Controls:
+
 - **Solo Input Channel** - Solo/unsolo input channels
 
 #### EQ Controls:
+
 - **EQ Enable/Disable Input Channel** - Enable or disable EQ on input channels
 
 #### Preamp Controls:
+
 - **Set Preamp Gain** - Control preamp gain levels (-10dB to +50dB range)
 - **Toggle Preamp Pad** - Enable/disable -20dB input pad
 
 #### Filter Controls:
+
 - **Set High Pass Filter** - Control HPF frequency (Off, 20Hz to 400Hz)
 
 #### Send Level Controls:
@@ -84,7 +89,6 @@ The feedback portion of this module is heavily based on (Jeffery Davidsz's)[http
 - **Set Matrix Stereo Send Level** - Control individual matrix stereo send levels
 - **Input to Main Assign** - Assign/unassign inputs to main mix
 - **Set UFX Stereo Send Level** - Control individual UFX stereo send levels
-
 
 ### 🎯 Routing & Assignment
 
@@ -101,15 +105,18 @@ The feedback portion of this module is heavily based on (Jeffery Davidsz's)[http
 The UFX card is an effects processing expansion card for 4rea4 systems. These controls are available when UFX cards are installed:
 
 #### UFX Global Controls:
+
 - **Set UFX Global Key** - Control the global key setting for UFX processing (C, C#, D, D#, E, F, F#, G, G#, A, A#, B)
 - **Set UFX Global Scale** - Control the global scale setting for UFX processing (Major, Minor)
 
 #### UFX Unit Controls:
+
 - **Set UFX Unit Parameter** - Direct control of UFX unit parameters using MIDI channel M and control number
 - **Set UFX Unit Key Parameter** - Control UFX unit key with automatic CC value scaling
 - **Set UFX Unit Scale Parameter** - Control UFX unit scale with automatic CC value scaling (Major, Minor, Chromatic)
 
 #### UFX Send/Return Controls:
+
 - **Mute UFX Stereo Send** - Mute/unmute UFX stereo send buses (1-8)
 - **Mute UFX Stereo Return** - Mute/unmute UFX stereo return channels (1-8)
 - **Set UFX Stereo Send Fader to Level** - Control UFX stereo send master fader levels
@@ -121,6 +128,7 @@ The UFX card is an effects processing expansion card for 4rea4 systems. These co
 ## Fader Level Range
 
 All fader controls use a precise dB scale:
+
 - **Range**: -∞ to +10.5dB
 - **Resolution**: 0.5dB steps
 - **Total Steps**: 128 levels

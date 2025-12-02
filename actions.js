@@ -17,7 +17,7 @@ module.exports = {
 		let actions = {}
 
 		this.CHOICES_INPUT_CHANNEL = []
-		for (let i = 0; i < this.chCount-1; i++) {
+		for (let i = 0; i < this.chCount - 1; i++) {
 			this.CHOICES_INPUT_CHANNEL.push({ label: `CH ${i + 1}`, id: i })
 		}
 
@@ -114,7 +114,7 @@ module.exports = {
 			]
 		}
 
-	// Actions for 4rea4
+		// Actions for 4rea4
 		actions['mute_input'] = {
 			name: 'Mute Input',
 			options: this.muteOptions('Input Channel', this.chCount, -1),
@@ -416,7 +416,7 @@ module.exports = {
 		}
 
 		// New Protocol V2.0 Actions
-		
+
 		// Scene Navigation
 		actions['scene_next'] = {
 			name: 'Scene Go Next',
@@ -869,5 +869,5 @@ module.exports = {
 			},
 		}
 		return actions
-	}
+	},
 }
